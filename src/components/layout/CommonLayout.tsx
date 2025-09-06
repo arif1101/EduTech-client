@@ -11,9 +11,12 @@ interface IProps {
 export default function CommonLayout({children} : IProps) {
   return (
         <div className="flex flex-col min-h-screen bg-slate-100 dark:bg-background">
-            <Navbar/> 
+            <Navbar/>
+             
             <div className="grow-1 max-w-[1256px] w-full mx-auto">{children}</div> 
-            <div className="bg-[#0F172A]"><Footer/></div>
+            <div className="bg-[#0F172A]">
+
+            <Footer/></div>
             
         </div>
     );

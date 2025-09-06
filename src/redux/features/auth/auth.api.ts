@@ -9,7 +9,7 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,
       }),
     }),
-    // register 
+    // registerp 
     register: builder.mutation({
         query: (userInfo) => ({
             url: "/user/register",
