@@ -45,7 +45,7 @@ export default function PopularCourses() {
         {/* Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {popularCourses?.length > 0 ? (
-            popularCourses.map((course) => <CourseCard key={course?.id } {...course} />)
+            popularCourses.map((course,index) => <CourseCard key={index } {...course} />)
           ) : (
             <p className="col-span-3 text-center text-gray-500">No courses found.</p>
           )}

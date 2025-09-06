@@ -12,21 +12,49 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { ModeToggle } from "./ModeToggler"
+import { useEffect, useState } from "react"
+import { Link } from "react-router"
+import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
+import { useDispatch } from "react-redux"
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "home", label: "Home", active: true },
-  { href: "courses", label: "Courses" },
-  { href: "books", label: "Books" },
-  { href: "exams", label: "Exams" },
-  { href: "forum", label: "Forum" },
-  { href: "resources", label: "Resources" },
-  { href: "blogs", label: "Blogs" },
+  { href: "/", label: "Home" },
+  { href: "/courses", label: "Courses" },
+  { href: "/books", label: "Books" },
+  { href: "/exams", label: "Exams" },
+  { href: "/forum", label: "Forum" },
+  { href: "/resources", label: "Resources" },
+  { href: "/blogs", label: "Blogs" },
 ]
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const dispatch = useDispatch()
+  const [logout] = useLogoutMutation()
+  const {data} = useUserInfoQuery(undefined)
+  const userInfo = data?.data?.user;
+  const email = userInfo?.email
+  // console.log(email)
+
+  // logout 
+  const handleLogout = async () => {
+    await logout(undefined)
+    dispatch(authApi.util.resetApiState())
+  }
+
+  // navbar scrolling 
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 10)
+    window.addEventListener("scroll", onScroll)
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
   return (
-    <header className="max-w-[1256px] w-full mx-auto  border-b px-4 md:px-6">
+    <header className={`max-w-[1256px] w-full sticky top-0 z-50 transition-all duration-300 mx-auto  border-b ${
+      isScrolled
+      ? "h-16 shadow-md backdrop-blur-md"
+      : "h-16 backdrop-blur-sm"
+    }`}>
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -73,7 +101,6 @@ export default function Navbar() {
                       <NavigationMenuLink
                         href={link.href}
                         className="py-1.5"
-                        active={link.active}
                       >
                         {link.label}
                       </NavigationMenuLink>
@@ -94,7 +121,6 @@ export default function Navbar() {
                 {navigationLinks.map((link, index) => (
                   <NavigationMenuItem key={index}>
                     <NavigationMenuLink
-                      active={link.active}
                       href={link.href}
                       className="text-muted-foreground hover:text-primary py-1.5 font-medium"
                     >
@@ -108,13 +134,23 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
+          {email ? (
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              className="text-sm font-medium border-primary/40 hover:bg-primary/10"
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              asChild
+              className="text-sm font-semibold bg-primary hover:bg-primary/90 px-5"
+            >
+              <Link to="/login">Login</Link>
+            </Button>
+          )}
           <ModeToggle/>
-          <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="#">Sign In</a>
-          </Button>
-          <Button asChild size="sm" className="text-sm">
-            <a href="#">Get Started</a>
-          </Button>
         </div>
       </div>
     </header>
