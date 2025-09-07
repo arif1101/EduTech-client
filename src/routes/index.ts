@@ -3,6 +3,7 @@ import BookDetails from "@/pages/Book/BookDetails";
 import Books from "@/pages/Book/Books";
 import Course from "@/pages/Course/Course";
 import CourseDetails from "@/pages/Course/CourseDetails";
+import Dashboard from "@/pages/Dashboard/Dashboard";
 import HomePage from "@/pages/HomePage";
 import Login from "@/pages/Login/Login";
 import Register from "@/pages/Register/Register";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
                         {
                 Component: BookDetails,
                 path: "/books/:id"
+            },
+            {
+                Component: Dashboard,
+                path: "/dashboard"
             }
         ]
     },

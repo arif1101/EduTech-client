@@ -13,9 +13,10 @@ import {
 } from "@/components/ui/popover"
 import { ModeToggle } from "./ModeToggler"
 import { useEffect, useState } from "react"
-import { Link } from "react-router"
+import { Link, NavLink } from "react-router"
 import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { useDispatch } from "react-redux"
+import ProfileSidebar from "./ProfileSideBar"
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -30,6 +31,7 @@ const navigationLinks = [
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useDispatch()
   const [logout] = useLogoutMutation()
   const {data} = useUserInfoQuery(undefined)
@@ -41,6 +43,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     await logout(undefined)
     dispatch(authApi.util.resetApiState())
+    setIsSidebarOpen(false)
   }
 
   // navbar scrolling 
@@ -50,13 +53,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
   return (
-    <header className={`max-w-[1256px] w-full sticky top-0 z-50 transition-all duration-300 mx-auto  border-b ${
+  <>
+    <header className={` w-full sticky top-0 z-50 transition-all duration-300 mx-auto  border-b bg-white  ${
       isScrolled
-      ? "h-16 shadow-md backdrop-blur-md"
-      : "h-16 backdrop-blur-sm"
+      ? "h-20 shadow-md backdrop-blur-md"
+      : "h-20 backdrop-blur-sm"
     }`}>
-      <div className="flex h-16 items-center justify-between gap-4">
+      <div className="max-w-[1256px] mx-auto flex h-16 items-center justify-between gap-4">
         {/* Left side */}
+          <div className="text-primary hover:text-primary/90">
+            <img src={logo} alt="" className="w-[64px] h-[64px] hidden md:flex  "/>
+          </div>
         <div className="flex items-center gap-2">
           {/* Mobile menu trigger */}
           <Popover>
@@ -65,7 +72,7 @@ export default function Navbar() {
                 className="group size-8 md:hidden"
                 variant="ghost"
                 size="icon"
-              >
+                >
                 <svg
                   className="pointer-events-none"
                   width={16}
@@ -77,19 +84,19 @@ export default function Navbar() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   xmlns="http://www.w3.org/2000/svg"
-                >
+                  >
                   <path
                     d="M4 12L20 12"
                     className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
-                  />
+                    />
                   <path
                     d="M4 12H20"
                     className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
-                  />
+                    />
                   <path
                     d="M4 12H20"
                     className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
-                  />
+                    />
                 </svg>
               </Button>
             </PopoverTrigger>
@@ -98,11 +105,21 @@ export default function Navbar() {
                 <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                   {navigationLinks.map((link, index) => (
                     <NavigationMenuItem key={index} className="w-full">
-                      <NavigationMenuLink
-                        href={link.href}
+                      <NavigationMenuLink asChild
                         className="py-1.5"
-                      >
-                        {link.label}
+                        >
+                        <NavLink
+                          to={link.href}
+                          className={({ isActive }) =>
+                            `py-1.5 font-medium transition-colors !text-black ${
+                              isActive
+                              ? "text-sky-600 border-b-2 border-sky-500"
+                              : "text-muted-foreground hover:text-primary"
+                            }`
+                          }
+                          >
+                          {link.label}
+                        </NavLink>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   ))}
@@ -110,23 +127,29 @@ export default function Navbar() {
               </NavigationMenu>
             </PopoverContent>
           </Popover>
+          <div className="text-primary hover:text-primary/90 md:hidden">
+            <img src={logo} alt="" className="w-[64px] h-[64px]"/>
+          </div>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-primary hover:text-primary/90">
-              <img src={logo} alt="" className="w-[64px] h-[64px]"/>
-            </a>
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
-              <NavigationMenuList className="gap-2">
+              <NavigationMenuList className="gap-4">
                 {navigationLinks.map((link, index) => (
-                  <NavigationMenuItem key={index}>
-                    <NavigationMenuLink
-                      href={link.href}
-                      className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                    >
-                      {link.label}
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
+                <NavigationMenuItem key={index}>
+                  <NavLink
+                    to={link.href}
+                    className={({ isActive }) =>
+                      `py-1.5 transition-colors text-[14px] font-medium !text-black ${
+                        isActive
+                          ? "text-sky-600 border-b-2 border-sky-500"
+                          : "text-muted-foreground hover:text-primary"
+                      }`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
@@ -134,18 +157,25 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
+          {/* profile */}
           {email ? (
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="text-sm font-medium border-primary/40 hover:bg-primary/10"
-            >
-              Logout
-            </Button>
+            <div className="flex gap-2 justify-end">
+            <div onClick={() => setIsSidebarOpen(true)} className="flex items-center gap-2 border py-1 px-2 rounded-md bg-slate-200">
+              {/* Circle Avatar with First Letter */}
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white font-bold">
+                M
+              </div>
+              {/* Name */}
+              <div className="font-semibold text-gray-700">
+                Arif
+              </div>
+            </div>
+          </div>
+
           ) : (
             <Button
-              asChild
-              className="text-sm font-semibold bg-primary hover:bg-primary/90 px-5"
+            asChild
+            className="text-sm font-semibold bg-primary hover:bg-primary/90 px-5"
             >
               <Link to="/login">Login</Link>
             </Button>
@@ -154,5 +184,12 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+
+      <ProfileSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        onLogout={handleLogout}
+      />
+</>
   )
 }
