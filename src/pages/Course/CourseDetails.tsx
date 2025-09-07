@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import CourseTab from "@/components/ui/courseTab";
+import { useAddCourseCartMutation } from "@/redux/features/cart/cart.api";
 import { useSingleCourseQuery } from "@/redux/features/course/course.api"
 import {  CheckCircle, Clock, Network, Play, Timer, User, Video } from "lucide-react"
 import { useState } from "react";
@@ -9,9 +11,22 @@ export default function CourseDetails() {
     const {id} = useParams()
     const [showModal, setShowModal] = useState(false)
 
+    const [addCourseCart, {isLoading: isAddingToCart}] = useAddCourseCartMutation()
+    
     // data fetch 
     const {data,isLoading,error} = useSingleCourseQuery(id)
     const course = data?.data
+    const thumbnail = course?.thumbnail
+    console.log(id)
+
+    const handleEnroll = async () => {
+        try {
+        await addCourseCart({courseId :id}).unwrap()
+        console.log("Course added to cart successfully!")
+        } catch (err) {
+        console.error("Failed to add course:", err)
+        }
+    }
 
     return (
         <div className='pt-6'>
@@ -64,17 +79,23 @@ export default function CourseDetails() {
 
                     {/* right enroll content content  */}
                     <div className='w-1/3 sticky top-6 shadow-md overflow-hidden bg-white rounded-xl p-6 border border-blue-500'>
-                        <div className="relative h-48 flex items-center justify-center cursor-pointer bg-[url('/thum-1.jpg')]"
+                        <div className={`relative h-48 flex items-center justify-center cursor-pointer bg-[url(${thumbnail})]`}
                         onClick={() => setShowModal(true)}>
                             {/* add here youtube video. when i click to play it open with a modal and play in modal */}
-                            <Play className='text-white text-4xl z-10'></Play>
+                            <Play className=' text-4xl z-10'></Play>
                             <div className='absolute inset-0 rounded-lg'></div>
 
                         </div>
                         <div className="mt-6">
-                            <div className="text-2xl font-semibold mb-6">৳200.00</div>
+                            <div className="text-2xl font-semibold mb-6">{course?.price}</div>
                             <div>
-                            <button  className="btn bg-sky-500 w-full mb-4">Enroll Now</button>
+                                <Button
+                                onClick={handleEnroll}
+                                disabled={isAddingToCart}
+                                className="btn bg-sky-500 w-full mb-4 hover:bg-sky-600"
+                                >
+                                {isLoading ? "Adding..." : "Enroll Now"}
+                                </Button>
                             </div>
                             <div className="space-y-2 text-base font-semibold text-gray-700">
                                 <div className="flex items-center gap-2">
@@ -93,7 +114,7 @@ export default function CourseDetails() {
                         </div>
                     </div>
                     {showModal && (
-                    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+                    <div className="fixed inset-0  flex items-center justify-center z-50">
                     <div className="bg-white p-4 rounded-lg max-w-3xl w-full relative">
                         <button
                         onClick={() => setShowModal(false)}

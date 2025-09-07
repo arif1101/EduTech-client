@@ -9,8 +9,9 @@ import type { Course } from "@/type/type";
 export default function Course() {
   const { data } = useAllCoursesQuery(undefined);
   const courses = data?.data;
+  console.log(courses)
   // console.log(courses[0])
-  const [layout, setLayout] = useState("grid");
+  const [layout, setLayout] = useState<"grid" | "list">("grid");
 
   const [openCategory, setOpenCategory] = useState(true);
   const [openLevel, setOpenLevel] = useState(true);
