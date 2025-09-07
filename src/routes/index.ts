@@ -1,4 +1,6 @@
 import App from "@/App";
+import BookDetails from "@/pages/Book/BookDetails";
+import Books from "@/pages/Book/Books";
 import Course from "@/pages/Course/Course";
 import CourseDetails from "@/pages/Course/CourseDetails";
 import HomePage from "@/pages/HomePage";
@@ -25,6 +27,14 @@ export const router = createBrowserRouter([
             {
                 Component: CourseDetails,
                 path: "/courses/:id"
+            },
+            {
+                Component: Books,
+                path: "/books"
+            },
+                        {
+                Component: BookDetails,
+                path: "/books/:id"
             }
         ]
     },

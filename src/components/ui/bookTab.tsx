@@ -6,35 +6,8 @@ import {
 } from "@/components/ui/tabs"
 import { Box, Plane } from "lucide-react";
 import Rating from "./Rating";
-import Curriculum from "@/pages/Course/CurriculumList";
 
-type CurriculumItem = {
-  title: string;
-  contents: string[];
-  _id: string;
-};
-
-type Instructor = {
-  name: string;
-  photo: string;
-  status: string;
-  _id: string;
-};
-
-type Overview = {
-  description: string;
-  requirements: string[];
-  thisCourseIncludes: string[];
-  whatYouWillLearn: string[];
-};
-
-type CourseTabProps = {
-  overview: Overview;
-  curriculum: CurriculumItem[];
-  instructors: Instructor[];
-};
-
-export default function CourseTab({ overview, curriculum, instructors }: CourseTabProps) {
+export default function BookTab() {
   
   return (
     <Tabs defaultValue="tab-1" className="">
@@ -43,22 +16,16 @@ export default function CourseTab({ overview, curriculum, instructors }: CourseT
           value="tab-1"
           className="data-[state=active]:after:bg-sky-500 relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
-          Overview
+          Details
         </TabsTrigger>
         <TabsTrigger
           value="tab-2"
           className="data-[state=active]:after:bg-sky-500 relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
-          Curriculum
+          Author
         </TabsTrigger>
         <TabsTrigger
           value="tab-3"
-          className="data-[state=active]:after:bg-sky-500 relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-        >
-          Instructors
-        </TabsTrigger>
-        <TabsTrigger
-          value="tab-4"
           className="data-[state=active]:after:bg-sky-500 relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
           Review&Rating
@@ -69,58 +36,23 @@ export default function CourseTab({ overview, curriculum, instructors }: CourseT
       <TabsContent value="tab-1">
         {/* overview  */}
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-4">
-            <h1 className="text-2xl font-bold">Description</h1>
-            <p className=" text-black/80 text-[14px]">{overview?.description}</p>
-          </div>
-          {/* what you learn  */}
-          <div className="flex flex-col gap-4">
-            <h1 className="text-[20px] font-semibold">what you learn</h1>
-            <div className="list-disc list-inside grid grid-cols-2 text-black/80 text-[14px]">
-            {overview.whatYouWillLearn.map((item, i) => (
-              <p key={i}>{item}</p>
-            ))}
-          </div>
-          </div>
-          {/* requirements  */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-semibold mt-4 text-[20px]">Requirements:</h4>
-            <div className="list-disc list-inside text-black/80 text-[14px]">
-              {overview.requirements.map((req, i) => (
-                <p key={i}>{req}</p>
-              ))}
-            </div>
-          </div>
-          {/* this course includes  */}
-          <div>
-            <h4 className="font-semibold mt-2 text-[20px]">This course includes:</h4>
-            <div className="list-disc list-inside grid grid-cols-2 text-black/80 text-[14px]">
-              {overview.thisCourseIncludes.map((item, i) => (
-                <p key={i}>{item}</p>
-              ))}
-            </div>
-          </div>
+            <h1 className="text-[20px] font-semibold">Book Title</h1>
+            <p className="text-[16px]">book details sfksd f sdjfsdalfs fskjfasldf s f sdf sd fsf sd fsf sdf sf sdf sd fsa fas fsadf as fasf asdf s</p>
+
         </div>
       </TabsContent>
-      {/* curriculum  */}
+      {/* Author  */}
       <TabsContent value="tab-2">
-        <h1 className="text-2xl font-bold">Course Content</h1>
-        <Curriculum curriculum={curriculum}/>
-      </TabsContent>
-      {/* instructors  */}
-      <TabsContent value="tab-3">
-        {instructors.map((inst) => (
-          <div key={inst._id} className="flex items-center gap-4 mb-4">
-            <img src={inst.photo} alt={inst.name} className="w-12 h-12 rounded-full object-cover" />
+          <div className="flex items-center gap-4 mb-4">
+            <img src="/#" className="w-12 h-12 rounded-full object-cover" />
             <div>
-              <p className="font-semibold">{inst.name}</p>
-              <p className="text-sm text-muted-foreground">{inst.status}</p>
+              <p className="font-semibold">Arif Rahman</p>
+              <p className="text-sm text-muted-foreground">sfdka dskfsdkf </p>
             </div>
           </div>
-        ))}
       </TabsContent>
       {/* rating raeview  */}
-      <TabsContent value="tab-4">
+      <TabsContent value="tab-3">
           <div className="tab-content border-base-300 bg-base-100">
           <div>
               <div>
