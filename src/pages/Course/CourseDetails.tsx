@@ -34,7 +34,7 @@ export default function CourseDetails() {
                         </div>
                         <div className='flex items-center gap-2'>
                             <Network/>
-                            <h3>beginer</h3>
+                            <h3 className="text-purple-500 font-bold">beginer</h3>
                         </div>
                     </div>
                     <div className="flex gap-4">
