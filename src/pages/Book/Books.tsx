@@ -86,7 +86,7 @@ export default function Books() {
   }, [isSidebarOpen]);
 
   return (
-    <div className="mt-[76px]">
+    <div className="">
       {/* Title */}
       <div className="bg-sky-500 w-[100vw] relative left-[50%] right-[50%] ml-[-50vw] mr-[-50vw]">
         <h1 className="max-w-[1256px] mx-auto text-[28px] sm:text-[32px] md:text-[36px] text-white font-bold py-8">
