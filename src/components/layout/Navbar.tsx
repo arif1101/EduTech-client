@@ -62,7 +62,9 @@ export default function Navbar() {
       <div className="max-w-[1256px] mx-auto flex h-16 items-center justify-between gap-4">
         {/* Left side */}
           <div className="text-primary hover:text-primary/90">
-            <img src={logo} alt="" className="w-[64px] h-[64px] hidden md:flex  "/>
+          <p className="text-3xl font-bold text-sky-500">EduTech</p>
+
+            {/* <img src={logo} alt="" className="w-[64px] h-[64px] hidden md:flex  "/> */}
           </div>
         <div className="flex items-center gap-2">
           {/* Mobile menu trigger */}

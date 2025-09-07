@@ -1,3 +1,5 @@
+import type { ComponentType } from "react";
+
 export type Category = "Academic" | "Technology" | "Business"|"Arts"|"Language";
 // types/course.ts
 export interface Course {
@@ -13,3 +15,54 @@ export interface Course {
   thumbnail?: string;
   averageRating?: number;
 }
+
+export type TRole = "ADMIN"
+
+export interface ISidebarItem {
+  title: string;
+  items: {
+    title: string;
+    url: string;
+    component: ComponentType;
+  }[];
+}
+
+// courseCartItem.type.ts
+export interface ICourseCartItem {
+  _id: string
+  title: string
+  price: number
+  thumbnail: string
+  category: string
+  subject: string
+  level: string
+  classLevel: string
+  language: string
+  duration: number
+  studentsEnrolled: number
+  averageRating: number
+  instructor: {
+    _id: string
+    name: string
+    photo: string
+    status: string
+  }
+  tags: string[]
+  overview: {
+    description: string
+    whatYouWillLearn: string[]
+    requirements: string[]
+    thisCourseIncludes: string[]
+    _id: string
+  }
+  createdAt: string
+  updatedAt: string
+}
+
+export interface ICourseCartItem {
+  _id: string
+  title: string
+  price: number
+  thumbnail: string
+}
+

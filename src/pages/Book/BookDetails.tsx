@@ -2,16 +2,32 @@ import BookTab from "@/components/ui/bookTab"
 import { Button } from "@/components/ui/button"
 import CardRating from "@/components/ui/cardRating"
 import { useSingleBookQuery } from "@/redux/features/book/book.api"
+import { useAddBookCartMutation } from "@/redux/features/cart/cart.api"
 import { useParams } from "react-router"
+import { toast } from "sonner"
 
 export default function BookDetails() {
     const {id} = useParams()
-    console.log(id)
 
     const {data,isLoading,error} = useSingleBookQuery(id)
     const book = data?.data
-    console.log(book)
-    const {title, bookImage, hardPrice, softPrice, author, copy} = book || {};
+    // console.log(book)
+    const {_id:bookId,title, hardPrice, softPrice, author, copy, image} = book || {};
+
+    const [addBookCart, { isLoading: bookCartLoading }] = useAddBookCartMutation()
+    const handleAddToCart = async (copyType: "Softcopy" | "Hardcopy") => {
+        try {
+        await addBookCart({
+            bookId,
+            quantity: 1,      // 👈 set default quantity or let user choose
+            copyType,
+        }).unwrap()
+        toast.success("book listed to cart")
+        console.log(`${copyType} book added to cart!`)
+        } catch (err) {
+        console.error("Failed to add book:", err)
+        }
+    }
   return (
         <div className='py-12'>
             {isLoading ? (<p>Loading....</p>) : error? (<p>Something went wrong!</p>) : (
@@ -19,7 +35,7 @@ export default function BookDetails() {
 
                     {/* left content  */}
                     <div className='max-w-[300px] w-full max-h-[450px] h-full hover:scale-105 duration-300 shadow-xl shadow-black sticky top-24'>
-                        <img className='h-full' src={bookImage} alt="" />
+                        <img className='h-full' src={image} alt="" />
                     </div>
 
                     {/* middle content  */}
@@ -45,7 +61,7 @@ export default function BookDetails() {
                         <div className="sticky top-24 border max-w-[272px] text-white p-2 text-center rounded-lg">
                             <div className='w-[254.4px] h-[192px] bg-slate-200 py-3 relative'>
                             <p className='text-green-500 absolute bottom-2 left-2'>✓ {copy}</p>
-                            <img src={book.bookImage} alt="" className='h-full w-[106.66px] mx-auto shadow-lg shadow-slate-700' />
+                            <img src={image} alt="" className='h-full w-[106.66px] mx-auto shadow-lg shadow-slate-700' />
                             </div>
                             <h1 className='text-left text-base text-black font-semibold mb-6 mt-2'>{title}</h1>
                             <div className='flex flex-col gap-2'>
@@ -57,8 +73,21 @@ export default function BookDetails() {
                                     <CardRating/>
                                 </div>
                                 <div className='flex flex-col gap-2 mt-6'>
-                                    <Button className='btn w-full flex border-slate-300 justify-between rounded-xl'>Buy Soft Copy Only <span>TK {softPrice}</span></Button>
-                                    <Button className='btn bg-sky-500 w-full flex justify-between rounded-xl hover:bg-sky-600'>Buy hard Copy <span>TK {hardPrice}</span></Button>
+                                    <Button
+                                        onClick={() => handleAddToCart("Softcopy")}
+                                        disabled={bookCartLoading}
+                                        className="btn w-full flex border-slate-300 justify-between rounded-xl"
+                                    >
+                                        Buy Soft Copy Only <span>TK {softPrice}</span>
+                                    </Button>
+
+                                    <Button
+                                        onClick={() => handleAddToCart("Hardcopy")}
+                                        disabled={bookCartLoading}
+                                        className="btn bg-sky-500 w-full flex justify-between rounded-xl hover:bg-sky-600"
+                                    >
+                                        Buy Hard Copy <span>TK {hardPrice}</span>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
