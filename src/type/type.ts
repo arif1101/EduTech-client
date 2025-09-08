@@ -27,8 +27,26 @@ export interface ISidebarItem {
   }[];
 }
 
+
+
 // courseCartItem.type.ts
-export interface ICourseCartItem {
+
+export interface IInstructor {
+  _id: string
+  name: string
+  photo: string
+  status: string
+}
+
+export interface ICourseOverview {
+  description: string
+  whatYouWillLearn: string[]
+  requirements: string[]
+  thisCourseIncludes: string[]
+  _id: string
+}
+
+export interface ICourse {
   _id: string
   title: string
   price: number
@@ -41,28 +59,57 @@ export interface ICourseCartItem {
   duration: number
   studentsEnrolled: number
   averageRating: number
-  instructor: {
-    _id: string
-    name: string
-    photo: string
-    status: string
-  }
+  instructor: IInstructor
   tags: string[]
-  overview: {
-    description: string
-    whatYouWillLearn: string[]
-    requirements: string[]
-    thisCourseIncludes: string[]
-    _id: string
-  }
+  overview: ICourseOverview
   createdAt: string
   updatedAt: string
 }
 
 export interface ICourseCartItem {
   _id: string
-  title: string
-  price: number
-  thumbnail: string
+  course: ICourse   // ✅ full course object
 }
+
+
+
+// courseCartItem.type.ts
+// export interface ICourseCartItem {
+//   _id: string
+//   title: string
+//   price: number
+//   thumbnail: string
+//   category: string
+//   subject: string
+//   level: string
+//   classLevel: string
+//   language: string
+//   duration: number
+//   studentsEnrolled: number
+//   averageRating: number
+//   instructor: {
+//     _id: string
+//     name: string
+//     photo: string
+//     status: string
+//   }
+//   tags: string[]
+//   overview: {
+//     description: string
+//     whatYouWillLearn: string[]
+//     requirements: string[]
+//     thisCourseIncludes: string[]
+//     _id: string
+//   }
+//   createdAt: string
+//   updatedAt: string
+// }
+
+// export interface ICourseCartItem {
+//   _id: string
+//   course: string
+//   title: string
+//   price: number
+//   thumbnail: string
+// }
 
