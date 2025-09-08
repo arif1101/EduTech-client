@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input"
 import { Link, useNavigate } from "react-router"
 import { toast } from "sonner"
 import { useLoginMutation } from "@/redux/features/auth/auth.api"
+import CredentialLogin from "@/components/CredentialLogin"
 
 // ✅ Validation schema
 const formSchema = z.object({
@@ -66,7 +67,10 @@ export default function LoginCard() {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-sky-100 ">
 
         <div className="w-6/12">
-        <Link to="/">Home</Link>
+        <div className="max-w-md mx-auto flex justify-between mb-4">
+            <Button className="bg-sky-500 hover:bg-sky-600"><Link to="/">Home</Link></Button>
+            <CredentialLogin/>
+        </div>
             <Card className="w-full mx-auto max-w-md shadow-xl border border-sky-100 rounded-2xl bg-white">
                 <CardHeader className="text-center space-y-2">
                 <CardTitle className="text-3xl font-bold bg-gradient-to-r from-sky-600 to-sky-500 bg-clip-text text-transparent">

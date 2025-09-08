@@ -5,6 +5,7 @@ import { useSingleCourseQuery } from "@/redux/features/course/course.api"
 import {  CheckCircle, Clock, Network, Play, Timer, User, Video } from "lucide-react"
 import { useState } from "react";
 import {  useParams } from "react-router"
+import { toast } from "sonner";
 
 
 export default function CourseDetails() {
@@ -22,9 +23,10 @@ export default function CourseDetails() {
     const handleEnroll = async () => {
         try {
         await addCourseCart({courseId :id}).unwrap()
-        console.log("Course added to cart successfully!")
+        toast.success("successfully Enrolled, check your cart")
         } catch (err) {
-        console.error("Failed to add course:", err)
+            console.log(err)
+            toast.error("something wrong! duplicate enroll")
         }
     }
 

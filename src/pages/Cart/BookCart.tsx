@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { useGetBookCartQuery } from '@/redux/features/cart/cart.api'
+import { useGetBookCartQuery, useRemoveBookFromCartMutation } from '@/redux/features/cart/cart.api'
+import { CircleX } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface CartItem {
   _id: string;
@@ -11,7 +13,9 @@ interface CartItem {
   image: string;
   price: number;
   quantity: number;
+  book: string
 }
+
 
 // interface CartProps {
 //   items: CartItem[];
@@ -23,8 +27,23 @@ export default function BookCart() {
   const {data} = useGetBookCartQuery(undefined)
   const books = data?.data
   const items = data?.data?.items
-  console.log(items)
-  
+  // console.log(items)
+
+  const [removeBookFromCart, { isLoading }] = useRemoveBookFromCartMutation();
+
+  const handleDelete = async (book: string) => {
+    const bookId = book?._id;
+    // console.log("----",bookId)
+    try {
+      await removeBookFromCart(bookId).unwrap();
+      toast.success("Book deleted from cart")
+      console.log("Book removed successfully");
+    } catch (error) {
+      console.error("Failed to remove book:", error);
+      toast.success("something went wrong!")
+    }
+  };
+
   return (
     <div className='py-8 space-y-6'>
       {/* Cart Item + Coupon */}
@@ -45,9 +64,18 @@ export default function BookCart() {
                     className="w-20 h-20 rounded-md object-cover"
                   />
                   <div>
-                    <p className={`text-sm text-gray-500 uppercase font-medium ${item?.copyType === "Hardcopy" ? "text-purple-500":"text-orange-500"}`}>
+                  <div className='flex justify-between w-full'>
+                      <p className={`text-sm text-gray-500 uppercase font-medium ${item?.copyType === "Hardcopy" ? "text-purple-500":"text-orange-500"}`}>
                       {item?.copyType || "Book"}
                     </p>
+                    <CircleX
+                      onClick={() => !isLoading && handleDelete(item.book)}
+                      className={`text-red-500 cursor-pointer ${
+                        isLoading ? "opacity-50 pointer-events-none" : ""
+                      }`}
+                      size={20}
+                    />
+                  </div>
                     <h2 className="font-semibold">{item.title}</h2>
                     <p className="text-gray-700 font-medium">
                       ৳{item.price} × {item.quantity}

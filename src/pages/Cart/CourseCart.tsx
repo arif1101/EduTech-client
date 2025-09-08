@@ -1,21 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useGetCourseCartQuery } from "@/redux/features/cart/cart.api";
-import type { ICourseCartItem } from "@/type/type";
+import { useDeleteCourseCartMutation, useGetCourseCartQuery } from "@/redux/features/cart/cart.api";
 import { useState } from "react";
 import CoursePayment from "./CoursePayment";
+import { CircleX } from "lucide-react";
+import type { ICourseCartItem } from "@/type/type";
 
 export default function CourseCart() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [paymentMethod, setPaymentMethod] = useState(null);
-
+    const [deleteCourseCart, { isLoading }] = useDeleteCourseCartMutation();
     const {data} = useGetCourseCartQuery(undefined)
     const items: ICourseCartItem[] | undefined = data?.data?.items
 
     const totalItemsPrice = data?.data?.totalPrice
     console.log(items) 
+
+    const handleDelete = async (courseId: string) => {
+        console.log(courseId)// [object object]
+    try {
+        const result = await deleteCourseCart(courseId).unwrap();
+        console.log(result);
+    } catch (error) {
+        console.error("Failed to remove course:", error);
+    }
+    };
 
     // const handlePayment = (method) => {
     //     setPaymentMethod(method);
@@ -28,36 +39,43 @@ export default function CourseCart() {
         {/* Loop through courses */}
         <div className="col-span-2 space-y-4">
             {items?.map((item) => (
-            <Card
-                key={item._id}
-                className="flex p-4"
-            >
-                <div className="flex gap-4">
+            <Card key={item._id} className="flex p-4">
+            <div className="flex gap-4 ">
                 <img
-                    src="https://i.ibb.co.com/NgT1RCt4/35308524-8275127.jpg"
-                    alt={item.title}
-                    className="w-20 h-20 rounded-md object-cover"
+                src={item.course.thumbnail} // ✅ from course
+                alt={item.course.title}
+                className="w-20 h-20 rounded-md object-cover"
                 />
+                <div className="flex justify-between w-full">
                 <div>
                     <p className="text-sm text-gray-500 uppercase font-medium">
                     Course
                     </p>
-                    <h2 className="font-semibold">{item.title}</h2>
-                    <p className="text-gray-700 font-medium">৳{item.price}</p>
+                    <h2 className="font-semibold">{item.course.title}</h2>
+                    <p className="text-gray-700 font-medium">৳{item.course.price}</p>
                 </div>
+                <CircleX
+                    onClick={() => !isLoading && handleDelete(item.course._id)}
+                    className={`text-red-500 cursor-pointer ${
+                    isLoading ? "opacity-50 pointer-events-none" : ""
+                    }`}
+                    size={20}
+                />
                 </div>
-                <div className="text-right">
+            </div>
+            <div className="text-right ">
                 <p className="text-gray-600 text-sm">
-                    Subtotal:{" "}
-                    <span className="font-medium">৳{item.price}</span>
+                Subtotal:{" "}
+                <span className="font-medium">৳{item.course.price}</span>
                 </p>
-                </div>
+            </div>
             </Card>
+
             ))}
         </div>
 
         {/* Coupon Section */}
-        <Card className="p-4">
+        <Card className="p-4 max-h-[220px]">
             <h3 className="font-semibold">Coupon Code</h3>
             <p className="text-sm text-gray-600 mb-3">
             Unlock amazing savings with our exclusive coupons! Enjoy instant
@@ -109,8 +127,6 @@ export default function CourseCart() {
             {isModalOpen && (
                 <CoursePayment setIsModalOpen={setIsModalOpen}/>
             )}
-
-
             
         </div>
         </div>
