@@ -9,7 +9,7 @@ export const adminSidebarItems : ISidebarItem[] = [
     items: [
       {
         title: "Overview",
-        url: "/admin/admin-overview",
+        url: "/admin",
         component: AdminDashboard
       },
       {
