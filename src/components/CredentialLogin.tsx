@@ -25,14 +25,14 @@ export default function CredentialLogin() {
                 <div className="[&_strong]:text-foreground space-y-4 [&_strong]:font-semibold">
                   <div className="space-y-1">
                     <p>
-                      <strong>Admin</strong>
+                      <strong className="text-xl">Admin</strong>
                     </p>
                     <p>emial : tony@gmail.com</p>
                     <p>password : 11111111</p>
                   </div>
                   <div className="space-y-1">
                     <p>
-                      <strong>Admin</strong>
+                      <strong className="text-xl">User</strong>
                     </p>
                     <p>emial : arif@gmail.com</p>
                     <p>password : 11111111</p>

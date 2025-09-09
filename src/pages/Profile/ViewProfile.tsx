@@ -8,6 +8,8 @@ interface ViewProfileProps {
 }
 
 export default function ViewProfile({ user, onEdit }: ViewProfileProps) {
+  console.log(user)
+  
   return (
     <div className="">
     <div className="flex justify-between mb-6 px-4">
@@ -48,7 +50,7 @@ export default function ViewProfile({ user, onEdit }: ViewProfileProps) {
         <div className="grid grid-cols-2 gap-4 text-sm">
           <p><Phone className="inline w-4 h-4 mr-1" /> Mobile: {user.mobile}</p>
           <p><BookOpen className="inline w-4 h-4 mr-1" /> Academic Level: {user.academicLevel}</p>
-          <p><Building className="inline w-4 h-4 mr-1" /> Institute: {user.institute}</p>
+          <p><Building className="inline w-4 h-4 mr-1" /> Institute: {"arif"}</p>
           <p><Globe className="inline w-4 h-4 mr-1" /> Medium: {user.medium}</p>
           <p><MessageCircle className="inline w-4 h-4 mr-1" /> WhatsApp: {user.whatsapp}</p>
           <p><Calendar className="inline w-4 h-4 mr-1" /> Date of Birth: {user.dob}</p>

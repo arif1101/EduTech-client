@@ -24,6 +24,7 @@ import { Link, useNavigate } from "react-router"
 import {toast} from "sonner"
 import PasswordInput from "@/components/ui/PasswordInput"
 import { useRegisterMutation } from "@/redux/features/auth/auth.api"
+import { ArrowLeft } from "lucide-react"
 
 // ✅ Validation schema
 const registerSchema = z
@@ -100,7 +101,9 @@ export default function Register() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-sky-100 p-4">
       <Card className="w-full max-w-md shadow-xl border border-sky-100 rounded-2xl bg-white">
-        <Link to="/">Home</Link>
+        <div className="">
+          <Link to="/" className="font-bold underline text-sky-500 flex items-center"><ArrowLeft className="h-5"/> home</Link>
+        </div>
         <CardHeader className="text-center space-y-2">
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-sky-600 to-sky-400 bg-clip-text text-transparent">
             Create Account

@@ -16,6 +16,11 @@ import { withAuth } from "@/utils/withAuth";
 import { createBrowserRouter } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
 import Cart from "@/pages/Cart/Cart";
+import Blogs from "@/pages/Blogs/Blogs";
+import Resources from "@/pages/Resources/Resources";
+import Forum from "@/pages/Forum/Forum";
+import Exams from "@/pages/Exams/Exams";
+import Development from "@/pages/Development";
 
 
 
@@ -56,6 +61,46 @@ export const router = createBrowserRouter([
             {
                 Component: Cart,
                 path: "/cart"
+            },
+            {
+                Component: Development,
+                path: "/courses/enrolled"
+            },
+            {
+                Component: Development,
+                path: "/books/purchased"
+            },
+            {
+                Component: Development,
+                path: "/resources/saved"
+            },
+            {
+                Component: Development,
+                path: "/exams/perticipated"
+            },
+            {
+                Component: Development,
+                path: "/calendar"
+            },
+            {
+                Component: Development,
+                path: "/orders"
+            },
+            {
+                Component: Exams,
+                path: "/exams"
+            },
+            {
+                Component: Forum,
+                path: "/forum"
+            },
+            {
+                Component: Resources,
+                path: "/resources"
+            },
+            {
+                Component: Blogs,
+                path: "/blogs"
             }
         ]
     },

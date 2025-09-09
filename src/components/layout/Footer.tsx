@@ -1,5 +1,4 @@
 import { Book, CheckCircle, Facebook, Link, Linkedin, Twitter, Users, Youtube } from "lucide-react";
-import logo from "../../assets/icons/eduTech_logo.svg"
 
 export default function Footer() {
   return (
@@ -42,8 +41,7 @@ export default function Footer() {
             {/* Logo & About */}
             <div className="md:col-span-2 flex flex-col gap-7 ">
               <div className="flex items-center space-x-2">
-                <img src={logo} alt="Binary Physics Logo" className="h-16" />
-                <h2 className="text-xl font-bold">BINARY <br/> PHYSICS</h2>
+                <p className="text-sky-500 font-bold text-4xl">EduTech</p>
               </div>
               <p className="text-sm text-white">
               Integer venenatis consequat elit. Curabitur eget laoreet nibh. Cras euismod, tellus vitae luctus ultricies, lacus erat sagittis nulla, id ornare velit ligula congue etiam rhoncus urna.

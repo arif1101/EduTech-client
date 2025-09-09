@@ -32,6 +32,8 @@ export default function ProfileSidebar({
 }: SidebarProps) {
   const { data } = useUserInfoQuery(undefined)
   const user = data?.data?.user
+  const userRole = data?.data?.user?.role
+  console.log(userRole)
 
   const navigation = [
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -40,7 +42,7 @@ export default function ProfileSidebar({
     { label: "Enrolled Courses", href: "/courses/enrolled", icon: BookOpen },
     { label: "Purchased Books", href: "/books/purchased", icon: Book },
     { label: "Saved Resources", href: "/resources/saved", icon: FileText },
-    { label: "Participated Exams", href: "/exams", icon: AlertCircle },
+    { label: "Participated Exams", href: "/exams/perticipated", icon: AlertCircle },
     { label: "Calendar", href: "/calendar", icon: Calendar },
     { label: "Order History", href: "/orders", icon: ListOrdered },
     { label: "Admin Panel", href: "/admin", icon: Settings },
@@ -88,7 +90,30 @@ export default function ProfileSidebar({
           )}
 
           {/* Navigation */}
-          <nav className="space-y-2">
+<nav className="space-y-2">
+  {navigation.map((item) => {
+    if (item.href === "/admin" && userRole !== "ADMIN") return null; // skip admin
+    return (
+      <NavLink
+        key={item.href}
+        to={item.href}
+        onClick={onClose}
+        className={({ isActive }) =>
+          `flex items-center gap-2 px-3 py-2 rounded-md ${
+            isActive
+              ? "bg-gray-200 text-gray-900 font-medium"
+              : "text-gray-700 hover:bg-gray-100"
+          }`
+        }
+      >
+        <item.icon className="w-4 h-4" />
+        {item.label}
+      </NavLink>
+    );
+  })}
+</nav>
+
+          {/* <nav className="space-y-2">
             {navigation.map((item) => (
               <NavLink
                 key={item.href}
@@ -106,7 +131,7 @@ export default function ProfileSidebar({
                 {item.label}
               </NavLink>
             ))}
-          </nav>
+          </nav> */}
 
           {/* Logout button */}
           <Button
