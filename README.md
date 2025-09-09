@@ -1,69 +1,87 @@
-# React + TypeScript + Vite
+# EduTech Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An EduTech platform frontend built with **React, TypeScript, Vite, Redux Toolkit, Tailwind CSS, and Shadcn UI**.  
+Students can **enroll in courses**, **order books**, and manage their learning journey seamlessly.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 📚 Course enrollment & progress tracking  
+- 📖 Book ordering system  
+- 🎨 Modern UI with Shadcn, TailwindCSS & Radix UI  
+- 🔄 State management with Redux Toolkit  
+- 📊 Interactive charts with Recharts  
+- 🔐 Form validation using React Hook Form + Zod  
+- ⚡ Powered by Vite for fast builds & HMR  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Framework:** React + TypeScript + Vite  
+- **UI:** Tailwind CSS, Shadcn UI, Radix UI  
+- **State Management:** Redux Toolkit, React Redux  
+- **Forms & Validation:** React Hook Form, Zod  
+- **Charts & Visualization:** Recharts  
+- **API Requests:** Axios  
+- **Utilities:** Date-fns, Lucide React, Sonner  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📂 Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+edutech-client/
+├── src/              # Application source code
+│   ├── components/   # Reusable UI components
+│   ├── pages/        # Page-level components
+│   ├── router/       # Routing setup
+│   ├── redux/        # State management
+│   ├── hooks/        # Custom hooks
+│   └── utils/        # Utility functions
+├── public/           # Static assets
+├── package.json      # Dependencies & scripts
+└── vite.config.ts    # Vite configuration
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+
+
+🚀 Installation & Setup
+1. Clone the repository
+git clone https://github.com/your-username/edutech-client.git
+cd edutech-client
+
+2. Install dependencies
+
+If you’re using npm:
+
+npm install
+
+
+Or with yarn:
+
+yarn install
+
+
+Or with bun:
+
+bun install
+
+3. Start development server
+npm run dev
+
+
+Then open http://localhost:5173
+ in your browser.
+
+4. Build for production
+npm run build
+
+5. Preview production build
+npm run preview
+
+📏 Linting
+
+Run ESLint to check code quality:
+
+npm run lint
