@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { toast } from "sonner"
 
 interface EditProfileProps {
   user: any
@@ -12,11 +13,13 @@ export default function EditProfile({ user, onCancel, onSave }: EditProfileProps
   const [formData, setFormData] = useState(user)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = () => {
     onSave(formData) // send updated data back
+    toast.success("Profile updated successfully")
   }
 
   return (

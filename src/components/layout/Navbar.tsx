@@ -1,4 +1,4 @@
-import logo from "../../assets/icons/eduTech_logo.svg"
+
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
@@ -17,6 +17,7 @@ import { Link, NavLink } from "react-router"
 import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { useDispatch } from "react-redux"
 import ProfileSidebar from "./ProfileSideBar"
+import Notifications from "../Notifications"
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -37,7 +38,8 @@ export default function Navbar() {
   const {data} = useUserInfoQuery(undefined)
   const userInfo = data?.data?.user;
   const email = userInfo?.email
-  // console.log(email)
+  const userName = userInfo?.name
+  // console.log()
 
   // logout 
   const handleLogout = async () => {
@@ -54,24 +56,19 @@ export default function Navbar() {
   }, [])
   return (
   <>
-    <header className={` w-full sticky top-0 z-50 transition-all duration-300 mx-auto  border-b bg-white  ${
+    <header className={` w-full sticky top-0 z-50 transition-all duration-300 mx-auto  border-b bg-white dark:bg-gray-900  ${
       isScrolled
       ? "h-20 shadow-md backdrop-blur-md"
       : "h-20 backdrop-blur-sm"
     }`}>
       <div className="max-w-[1256px] mx-auto flex h-16 items-center justify-between gap-4">
         {/* Left side */}
-          <div className="text-primary hover:text-primary/90">
-          <p className="text-3xl font-bold text-sky-500">EduTech</p>
-
-            {/* <img src={logo} alt="" className="w-[64px] h-[64px] hidden md:flex  "/> */}
-          </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-centerr w-full justify-between gap-2">
           {/* Mobile menu trigger */}
           <Popover>
             <PopoverTrigger asChild>
               <Button
-                className="group size-8 md:hidden"
+                className="group size-8 md:hidden border ml-2"
                 variant="ghost"
                 size="icon"
                 >
@@ -102,7 +99,7 @@ export default function Navbar() {
                 </svg>
               </Button>
             </PopoverTrigger>
-            <PopoverContent align="start" className="w-36 p-1 md:hidden">
+            <PopoverContent align="start" className="border w-36 p-1 md:hidden">
               <NavigationMenu className="max-w-none *:w-full">
                 <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                   {navigationLinks.map((link, index) => (
@@ -129,20 +126,20 @@ export default function Navbar() {
               </NavigationMenu>
             </PopoverContent>
           </Popover>
-          <div className="text-primary hover:text-primary/90 md:hidden">
-            <img src={logo} alt="" className="w-[64px] h-[64px]"/>
+          <div className="text-primary hover:text-primary/90">
+          <p className="text-3xl font-bold text-sky-500">EduTech</p>
           </div>
           {/* Main nav */}
           <div className="flex items-center gap-6">
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
-              <NavigationMenuList className="gap-4">
+              <NavigationMenuList className="gap-6">
                 {navigationLinks.map((link, index) => (
                 <NavigationMenuItem key={index}>
                   <NavLink
                     to={link.href}
                     className={({ isActive }) =>
-                      `py-1.5 transition-colors text-[14px] font-medium !text-black ${
+                      `py-1.5 transition-colors text-[14px] font-medium !text-black dark:!text-white ${
                         isActive
                           ? "text-sky-600 border-b-2 border-sky-500"
                           : "text-muted-foreground hover:text-primary"
@@ -158,10 +155,11 @@ export default function Navbar() {
           </div>
         </div>
         {/* Right side */}
-        <div className="flex items-center gap-2">
+        <div className="flex w-[25%] items-end justify-end gap-2">
           {/* profile */}
           {email ? (
             <div className="flex gap-2 justify-end">
+            <Notifications/>
             <div onClick={() => setIsSidebarOpen(true)} className="flex items-center gap-2 border py-1 px-2 rounded-md bg-slate-200">
               {/* Circle Avatar with First Letter */}
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white font-bold">
@@ -169,20 +167,23 @@ export default function Navbar() {
               </div>
               {/* Name */}
               <div className="font-semibold text-gray-700">
-                Arif
+                {userName}
               </div>
             </div>
           </div>
 
           ) : (
+            <div className="flex gap-4">
             <Button
             asChild
             className="text-sm font-semibold bg-primary hover:bg-primary/90 px-5"
             >
               <Link to="/login">Login</Link>
             </Button>
+            <ModeToggle/>
+            </div>
           )}
-          <ModeToggle/>
+          
         </div>
       </div>
     </header>

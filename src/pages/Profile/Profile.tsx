@@ -9,17 +9,17 @@ export default function Profile() {
 
   // Mock user data (replace with API)
   const [user, setUser] = useState({
-    name: "Mohsin",
-    email: "mohsinamin953@gmail.com",
+    name: "Arif",
+    email: "arif@gmail.com",
     memberSince: "Sep 26, 2024",
-    mobile: "+8801784241318",
-    whatsapp: "+8801534115844",
-    institute: "Du",
+    mobile: "+8801700000008",
+    whatsapp: "+8801402667768",
+    institute: "UAP",
     gender: "Male",
-    fatherName: "Nafizul",
-    motherName: "AMMA",
-    description: "mohsinamin953@gmail.com",
-    academicLevel: "Grade 4",
+    fatherName: "Mizanur",
+    motherName: "Dilruba",
+    description: "arif@gmail.com",
+    academicLevel: "Grade 3.37",
     medium: "Bangla",
     dob: "2000-08-06",
   })

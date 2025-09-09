@@ -29,7 +29,7 @@ export default function Book({book} : BookProps) {
     const {_id, title,image, hardPrice } = book;
     console.log(_id)
   return (
-        <Link to={`/books/${_id}`}>
+        <Link to={`/books/${_id}`} className='mx-auto'>
         <div className="">
             <div className="border max-w-[272px] text-white p-2 text-center rounded-lg">
                 <div className='w-[254.4px] h-[192px] bg-slate-200 py-3'>

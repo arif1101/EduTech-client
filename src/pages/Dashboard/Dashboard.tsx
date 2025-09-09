@@ -1,18 +1,24 @@
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { Star, GraduationCap, Book, FileText } from "lucide-react"
 
 
 export default function Dashboard() {
+
+  const {data} = useUserInfoQuery(undefined)
+  const user = data?.data?.user 
+  console.log(data?.data?.user?.image)
+  
   return (
     <div className=" bg-gray-100 px-6 py-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Profile Card */}
         <div className="bg-white p-6 rounded-2xl shadow-md text-center col-span-1">
           <img
-            src="https://via.placeholder.com/100"
+            src={user?.image}
             alt="Profile"
             className="w-24 h-24 rounded-full mx-auto mb-4"
           />
-          <h2 className="text-xl font-semibold">Arifur Rahman</h2>
+          <h2 className="text-xl font-semibold">{user?.name}</h2>
           <p className="text-gray-500 text-sm mt-2 flex items-center justify-center gap-2">
             <svg
               className="w-4 h-4"
@@ -34,7 +40,7 @@ export default function Dashboard() {
                 d="M12 14v7m0 0h-3m3 0h3"
               />
             </svg>
-            arifurrahmanarif223@gmail.com
+            {user?.email}
           </p>
         </div>
 

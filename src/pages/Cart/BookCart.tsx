@@ -13,7 +13,12 @@ interface CartItem {
   image: string;
   price: number;
   quantity: number;
-  book: string
+    book: {
+    _id: string;
+    title: string;
+    image: string;
+    price: number;
+  };
 }
 
 
@@ -31,8 +36,8 @@ export default function BookCart() {
 
   const [removeBookFromCart, { isLoading }] = useRemoveBookFromCartMutation();
 
-  const handleDelete = async (book: string) => {
-    const bookId = book?._id;
+  const handleDelete = async (bookId: string) => {
+    // const bookId = book?._id;
     // console.log("----",bookId)
     try {
       await removeBookFromCart(bookId).unwrap();
@@ -69,7 +74,7 @@ export default function BookCart() {
                       {item?.copyType || "Book"}
                     </p>
                     <CircleX
-                      onClick={() => !isLoading && handleDelete(item.book)}
+                      onClick={() => !isLoading && handleDelete(item?.book?._id)}
                       className={`text-red-500 cursor-pointer ${
                         isLoading ? "opacity-50 pointer-events-none" : ""
                       }`}
