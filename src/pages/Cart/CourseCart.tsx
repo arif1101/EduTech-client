@@ -8,6 +8,8 @@ import { CircleX } from "lucide-react";
 import type { ICourseCartItem } from "@/type/type";
 
 export default function CourseCart() {
+    const [coupon, setCoupon] = useState("")
+    const [discount, setDiscount] = useState(0)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [paymentMethod, setPaymentMethod] = useState(null);
@@ -16,6 +18,8 @@ export default function CourseCart() {
     const items: ICourseCartItem[] | undefined = data?.data?.items
 
     const totalItemsPrice = data?.data?.totalPrice
+    const finalPrice = totalItemsPrice - discount
+    
     console.log(items) 
 
     const handleDelete = async (courseId: string) => {
@@ -27,6 +31,14 @@ export default function CourseCart() {
         console.error("Failed to remove course:", error);
     }
     };
+
+    const handleCouponApply = () => {
+        if (coupon === "EDU10"){
+            setDiscount(totalItemsPrice*0.1)
+        }else if(coupon === "FLAT500"){
+            setDiscount(500)
+        }
+    }
 
     // const handlePayment = (method) => {
     //     setPaymentMethod(method);
@@ -75,16 +87,20 @@ export default function CourseCart() {
         </div>
 
         {/* Coupon Section */}
-        <Card className="p-4 max-h-[220px]">
+        <Card className="p-4 max-h-[300px]">
             <h3 className="font-semibold">Coupon Code</h3>
             <p className="text-sm text-gray-600 mb-3">
             Unlock amazing savings with our exclusive coupons! Enjoy instant
             discounts, whether it's a percentage off, flat reduction, or even
             free shipping.
             </p>
+            <div>
+                <p>Coupon : EDU10</p>
+                <p>Coupon : FLAT500</p>
+            </div>
             <div className="flex gap-2">
-            <Input placeholder="Enter Coupon Code" />
-            <Button className="bg-sky-500 hover:bg-sky-600">Apply</Button>
+            <Input value={coupon} onChange={(e) => setCoupon(e.target.value)} placeholder="Enter Coupon Code" />
+            <Button onClick={handleCouponApply} className="bg-sky-500 hover:bg-sky-600">Apply</Button>
             </div>
         </Card>
         </div>
@@ -100,7 +116,7 @@ export default function CourseCart() {
                 </div>
                 <div className="flex justify-between font-bold text-lg text-blue-600">
                     <span>Total Amount</span>
-                    <span>{totalItemsPrice}</span>
+                    <span>{finalPrice}</span>
                 </div>
             </Card>
 

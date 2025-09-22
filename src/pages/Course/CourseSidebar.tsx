@@ -30,7 +30,7 @@ export default function CourseSidebar({
   handleCategoryChange,
 }: SidebarProps) {
   return (
-    <div className="p-4">
+    <div className="p-4 border-b bg-white dark:bg-black">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">Filter</h2>
         <button className="text-sm text-blue-600 hover:underline">

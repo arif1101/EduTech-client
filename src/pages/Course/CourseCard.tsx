@@ -39,7 +39,7 @@ export default function CourseCard({_id,averageRating,title,level,instructor,dur
                 {level}
               </p>
             </div>
-            <div className="p-4">
+            <div className="p-4 dark:bg-black dark:border">
               <h1 className="mb-2 md:mb-6 text-lg font-semibold truncate">{title}</h1>
               <div className="text-sm flex flex-col gap-2">
                 <div className="flex items-center gap-1">
@@ -73,7 +73,7 @@ export default function CourseCard({_id,averageRating,title,level,instructor,dur
                 src={thumbnail}
               />
             </div>
-            <div className="p-4 w-full flex flex-col justify-between">
+            <div className="p-4 w-full flex flex-col justify-between dark:bg-black border-2 rounded-r-md  ">
               <div>
                 <h1 className="text-lg font-semibold truncate">{title}</h1>
                 <div className="flex justify-between w-[200px]">
