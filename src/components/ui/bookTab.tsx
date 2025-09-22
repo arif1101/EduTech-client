@@ -11,7 +11,7 @@ export default function BookTab() {
   
   return (
     <Tabs defaultValue="tab-1" className="">
-      <TabsList className="h-auto w-full flex justify-start rounded-none  p-0 bg-slate-100 mb-4">
+      <TabsList className="h-auto w-full flex justify-start rounded-none  p-0 bg-slate-100 dark:bg-black mb-4">
         <TabsTrigger
           value="tab-1"
           className="data-[state=active]:after:bg-sky-500 relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
@@ -32,7 +32,7 @@ export default function BookTab() {
         </TabsTrigger>
       </TabsList>
 {/* main content here */}
-    <div className="p-10 border bg-white">
+    <div className="p-10 border bg-white dark:bg-black">
       <TabsContent value="tab-1">
         {/* overview  */}
         <div className="flex flex-col gap-6">
@@ -61,7 +61,7 @@ export default function BookTab() {
               </div>
               <div className='border mt-6 mb-6'></div>
               {/* comment form  */}
-              <div className=" mx-auto p-6 bg-gray-100 rounded-md shadow-md">
+              <div className=" mx-auto p-6 bg-gray-100 dark:bg-black rounded-md shadow-md">
                   <h3 className="text-lg font-semibold mb-4">Add Your Review</h3>
                   <Rating/>
                   <form>

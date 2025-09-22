@@ -64,13 +64,13 @@ export default function LoginCard() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-sky-100 ">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-sky-100">
 
-        <div className="w-6/12">
-        <div className="max-w-md mx-auto flex justify-between mb-4">
-            <Button className="bg-sky-500 hover:bg-sky-600"><Link to="/">Home</Link></Button>
-            <CredentialLogin/>
-        </div>
+        <div className="md:w-6/12  w-full px-4">
+            <div className="max-w-md mx-auto flex justify-between mb-4">
+                <Button className="bg-sky-500 hover:bg-sky-600"><Link to="/">Home</Link></Button>
+                <CredentialLogin/>
+            </div>
             <Card className="w-full mx-auto max-w-md shadow-xl border border-sky-100 rounded-2xl bg-white">
                 <CardHeader className="text-center space-y-2">
                 <CardTitle className="text-3xl font-bold bg-gradient-to-r from-sky-600 to-sky-500 bg-clip-text text-transparent">
@@ -97,7 +97,7 @@ export default function LoginCard() {
                             <FormControl>
                             <Input
                                 placeholder="test@gmail.com"
-                                className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl"
+                                className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl dark:text-black"
                                 {...field}
                             />
                             </FormControl>
@@ -125,7 +125,7 @@ export default function LoginCard() {
                             <Input
                                 type="password"
                                 placeholder="••••••••"
-                                className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl"
+                                className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl dark:text-black"
                                 {...field}
                             />
                             </FormControl>
@@ -148,7 +148,7 @@ export default function LoginCard() {
                 <CardFooter className="flex flex-col gap-3">
                 <Button
                     variant="outline"
-                    className="w-full rounded-xl shadow-sm hover:bg-sky-50 border-sky-200 text-sky-600"
+                    className="w-full rounded-xl shadow-sm hover:bg-sky-50 border-sky-200 text-sky-600 dark:hover:text-sky-600"
                 >
                     Login with Google
                 </Button>
@@ -159,7 +159,8 @@ export default function LoginCard() {
                 </CardFooter>
             </Card>
         </div>
-        <div className="w-6/12">
+
+        <div className="w-6/12 hidden md:block">
             <img className='h-screen w-full' src={loginImage} alt="" />
         </div>
     </div>
