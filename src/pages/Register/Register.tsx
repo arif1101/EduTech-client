@@ -129,7 +129,7 @@ export default function Register() {
                     <FormControl>
                       <Input
                         placeholder="John Doe"
-                        className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl"
+                        className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl dark:text-black"
                         {...field}
                       />
                     </FormControl>
@@ -148,7 +148,7 @@ export default function Register() {
                     <FormControl>
                       <Input
                         placeholder="test@gmail.com"
-                        className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl"
+                        className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl dark:text-black"
                         {...field}
                       />
                     </FormControl>
@@ -167,7 +167,7 @@ export default function Register() {
                     <FormControl>
                       <Input
                         placeholder="+8801XXXXXXXXX"
-                        className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl"
+                        className="focus:ring-2 focus:ring-sky-400 focus:border-sky-400 rounded-xl dark:text-black"
                         {...field}
                       />
                     </FormControl>
@@ -182,7 +182,7 @@ export default function Register() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700 font-medium">Password</FormLabel>
+                    <FormLabel className="text-gray-700 font-medium ">Password</FormLabel>
                     <FormControl>
                       <PasswordInput {...field}/>
                     </FormControl>

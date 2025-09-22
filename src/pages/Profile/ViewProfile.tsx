@@ -18,7 +18,7 @@ export default function ViewProfile({ user, onEdit }: ViewProfileProps) {
     </div>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {/* Left card */}
-      <div className="bg-white p-6 rounded-lg shadow space-y-4">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow space-y-4">
         <div className="flex items-center justify-center">
           <div className="grid grid-cols-3 gap-1">
             {[...Array(9)].map((_, i) => (
@@ -43,7 +43,7 @@ export default function ViewProfile({ user, onEdit }: ViewProfileProps) {
       </div>
 
       {/* Right card */}
-      <div className="md:col-span-2 bg-white p-6 rounded-lg shadow space-y-4">
+      <div className="md:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow space-y-4">
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold">Profile Details</h3>
         </div>

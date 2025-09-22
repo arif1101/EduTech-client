@@ -9,10 +9,10 @@ export default function Dashboard() {
   console.log(data?.data?.user?.image)
   
   return (
-    <div className=" bg-gray-100 px-6 py-12">
+    <div className=" bg-gray-100 px-6 py-12 dark:bg-black">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Profile Card */}
-        <div className="bg-white p-6 rounded-2xl shadow-md text-center col-span-1">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md text-center col-span-1">
           <img
             src={user?.image}
             alt="Profile"
@@ -52,7 +52,7 @@ export default function Dashboard() {
             { title: "Purchased Books", count: 0, color: "text-yellow-500", icon: <Book size={28} /> },
             { title: "Participated Exams", count: 0, color: "text-red-500", icon: <FileText size={28} /> },
         ].map((item, idx) => (
-            <div key={idx} className="bg-white px-4 py-6 rounded-2xl shadow-md">
+            <div key={idx} className="bg-white dark:bg-gray-800 px-4 py-6 rounded-2xl shadow-md">
             <div className={`${item.color} mb-2 flex justify-between`}>
                 <h3 className="text-lg font-semibold text-start">
                 {item.title.split(" ")[0]}<br />
@@ -66,7 +66,7 @@ export default function Dashboard() {
         </div>  
 
         {/* Upcoming Classes */}
-        <div className="bg-white p-6 rounded-2xl shadow-md text-center">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md text-center">
           <h2 className="text-lg font-bold text-blue-500 mb-4">Upcoming Classes</h2>
           <div className="opacity-60">
             <svg
@@ -90,9 +90,9 @@ export default function Dashboard() {
 
       {/* Course Table */}
       <div className="max-w-7xl mx-auto mt-10">
-        <div className="bg-white rounded-2xl shadow-md overflow-x-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-x-auto">
           <table className="min-w-full text-left">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
                 {["Course", "Level", "Duration", "Price", "Progress", "Action"].map(
                   (header, idx) => (
