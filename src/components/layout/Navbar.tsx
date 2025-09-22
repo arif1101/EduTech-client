@@ -61,9 +61,10 @@ export default function Navbar() {
       ? "h-20 shadow-md backdrop-blur-md"
       : "h-20 backdrop-blur-sm"
     }`}>
+
       <div className="max-w-[1256px] mx-auto flex h-16 items-center justify-between gap-4">
-        {/* Left side */}
-        <div className="flex items-centerr w-full justify-between gap-2">
+        {/*---------- Left side ----------- */}
+        <div className="flex items-center gap-2">
           {/* Mobile menu trigger */}
           <Popover>
             <PopoverTrigger asChild>
@@ -129,33 +130,36 @@ export default function Navbar() {
           <div className="text-primary hover:text-primary/90">
           <p className="text-3xl font-bold text-sky-500">EduTech</p>
           </div>
-          {/* Main nav */}
-          <div className="flex items-center gap-6">
-            {/* Navigation menu */}
-            <NavigationMenu className="max-md:hidden">
-              <NavigationMenuList className="gap-6">
-                {navigationLinks.map((link, index) => (
-                <NavigationMenuItem key={index}>
-                  <NavLink
-                    to={link.href}
-                    className={({ isActive }) =>
-                      `py-1.5 transition-colors text-[14px] font-medium !text-black dark:!text-white ${
-                        isActive
-                          ? "text-sky-600 border-b-2 border-sky-500"
-                          : "text-muted-foreground hover:text-primary"
-                      }`
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
+
         </div>
-        {/* Right side */}
-        <div className="flex w-[25%] items-end justify-end gap-2">
+
+        {/* ------------ Middle side ------- */}
+        <div className="flex items-center gap-6">
+          {/* Navigation menu */}
+          <NavigationMenu className="max-md:hidden">
+            <NavigationMenuList className="gap-6">
+              {navigationLinks.map((link, index) => (
+              <NavigationMenuItem key={index}>
+                <NavLink
+                  to={link.href}
+                  className={({ isActive }) =>
+                    `py-1.5 transition-colors text-[14px] font-medium !text-black dark:!text-white ${
+                      isActive
+                        ? "text-sky-600 border-b-2 border-sky-500"
+                        : "text-muted-foreground hover:text-primary"
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        {/* ---------- Right side ---------  */}
+        <div className="flex items-end justify-end gap-2">
           {/* profile */}
           {email ? (
             <div className="flex gap-2 justify-end">
@@ -186,13 +190,14 @@ export default function Navbar() {
           
         </div>
       </div>
-    </header>
 
-      <ProfileSidebar
-        isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
-        onLogout={handleLogout}
-      />
+    </header>     
+
+    <ProfileSidebar
+      isOpen={isSidebarOpen}
+      onClose={() => setIsSidebarOpen(false)}
+      onLogout={handleLogout}
+    />
 </>
   )
 }

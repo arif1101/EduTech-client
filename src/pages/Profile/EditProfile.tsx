@@ -23,7 +23,7 @@ export default function EditProfile({ user, onCancel, onSave }: EditProfileProps
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow space-y-4">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow space-y-4">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Edit Profile</h3>
         <Button variant="outline" onClick={onCancel}>
@@ -120,7 +120,7 @@ export default function EditProfile({ user, onCancel, onSave }: EditProfileProps
         />
       </div>
 
-      <Button onClick={handleSubmit} className="w-full">
+      <Button onClick={handleSubmit} className="w-full bg-sky-500 hover:bg-sky-600">
         Save Changes
       </Button>
     </div>

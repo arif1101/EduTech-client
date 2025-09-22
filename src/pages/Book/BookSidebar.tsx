@@ -33,7 +33,7 @@ export default function Filter({
   handleLanguageChange,
 }: FilterProps) {
   return (
-    <div className="min-h-screen p-4 bg-white mt-[76px] md:mt-0 w-[290px]">
+    <div className="min-h-screen p-4 bg-white dark:bg-black dark:border-2 mt-[76px] md:mt-0 w-[290px]">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">Filter</h2>
         <button

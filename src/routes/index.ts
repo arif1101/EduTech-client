@@ -21,6 +21,8 @@ import Resources from "@/pages/Resources/Resources";
 import Forum from "@/pages/Forum/Forum";
 import Exams from "@/pages/Exams/Exams";
 import Development from "@/pages/Development";
+import EnrolledCourse from "@/pages/EnrolledCourse/EnrolledCourse";
+import CoursePlayer from "@/pages/EnrolledCourse/CoursePlayer";
 
 
 
@@ -63,8 +65,12 @@ export const router = createBrowserRouter([
                 path: "/cart"
             },
             {
-                Component: Development,
+                Component: EnrolledCourse,
                 path: "/courses/enrolled"
+            },
+            {
+                Component: CoursePlayer,
+                path: "/courses/enrolled/:id"
             },
             {
                 Component: Development,

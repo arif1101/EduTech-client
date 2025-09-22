@@ -63,9 +63,9 @@ export default function Course() {
       </div>
 
       {/* main content */}
-      <div className="flex relative">
+      <div className="flex relative mt-6">
         {/* Sidebar (desktop) */}
-        <div className="hidden md:block w-[290px] bg-white">
+        <div className="hidden md:block w-[290px]">
           <CourseSidebar
             openCategory={openCategory}
             setOpenCategory={setOpenCategory}
@@ -91,7 +91,7 @@ export default function Course() {
               onClick={() => setIsSidebarOpen(false)}
             />
             {/* Drawer */}
-            <div className="relative w-[290px] bg-white h-full shadow-lg p-4 z-50 overflow-y-auto">
+            <div className="relative w-[290px] bg- dark:bg-black h-full shadow-lg p-4 z-50 overflow-y-auto">
               <button
                 className="absolute top-3 right-3 text-gray-600"
                 onClick={() => setIsSidebarOpen(false)}
@@ -133,8 +133,8 @@ export default function Course() {
                   onClick={() => setLayout("grid")}
                   className={
                     layout === "grid"
-                      ? "w-12 h-12 bg-sky-500 flex items-center text-white justify-center rounded-l-xl"
-                      : "w-12 h-12 hover:bg-sky-200 flex justify-center items-center bg-white rounded-l-xl"
+                      ? "w-12 h-12 bg-sky-500 flex items-center text-white  justify-center rounded-l-xl"
+                      : "w-12 h-12 hover:bg-sky-200 flex justify-center items-center bg-white rounded-l-xl dark:bg-black"
                   }
                 >
                   <LayoutGrid className="text-2xl" />
@@ -144,7 +144,7 @@ export default function Course() {
                   className={
                     layout === "list"
                       ? "w-12 h-12 bg-sky-500 flex items-center justify-center rounded-r-xl"
-                      : "w-12 h-12 hover:bg-sky-200 flex justify-center bg-white items-center rounded-r-xl"
+                      : "w-12 h-12 hover:bg-sky-200 flex justify-center bg-white items-center rounded-r-xl dark:bg-black"
                   }
                 >
                   <LayoutList className="text-2xl" />

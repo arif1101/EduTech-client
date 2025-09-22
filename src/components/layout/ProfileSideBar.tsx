@@ -14,6 +14,7 @@ import {
   Settings,
   LogOut,
 } from "lucide-react"
+import { ModeToggle } from "./ModeToggler"
 
 interface SidebarProps {
   isOpen: boolean
@@ -60,7 +61,7 @@ export default function ProfileSidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-black shadow-xl z-50 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -78,61 +79,43 @@ export default function ProfileSidebar({
         {/* Sidebar content */}
         <div className="p-4 space-y-4">
           {user && (
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white font-bold">
-                {user.name?.charAt(0)}
+            <div className="flex justify-between w-full">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white font-bold">
+                  {user.name?.charAt(0)}
+                </div>
+                <div>
+                  <p className="font-semibold">{user.name}</p>
+                  <p className="text-sm text-gray-500">{user.email}</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold">{user.name}</p>
-                <p className="text-sm text-gray-500">{user.email}</p>
-              </div>
+              <ModeToggle/>
             </div>
           )}
 
           {/* Navigation */}
-<nav className="space-y-2">
-  {navigation.map((item) => {
-    if (item.href === "/admin" && userRole !== "ADMIN") return null; // skip admin
-    return (
-      <NavLink
-        key={item.href}
-        to={item.href}
-        onClick={onClose}
-        className={({ isActive }) =>
-          `flex items-center gap-2 px-3 py-2 rounded-md ${
-            isActive
-              ? "bg-gray-200 text-gray-900 font-medium"
-              : "text-gray-700 hover:bg-gray-100"
-          }`
-        }
-      >
-        <item.icon className="w-4 h-4" />
-        {item.label}
-      </NavLink>
-    );
-  })}
-</nav>
-
-          {/* <nav className="space-y-2">
-            {navigation.map((item) => (
-              <NavLink
-                key={item.href}
-                to={item.href}
-                onClick={onClose}
-                className={({ isActive }) =>
-                  `flex items-center gap-2 px-3 py-2 rounded-md ${
-                    isActive
-                      ? "bg-gray-200 text-gray-900 font-medium"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }`
-                }
-              >
-                <item.icon className="w-4 h-4" />
-                {item.label}
-              </NavLink>
-            ))}
-          </nav> */}
-
+          <nav className="space-y-2">
+            {navigation.map((item) => {
+              if (item.href === "/admin" && userRole !== "ADMIN") return null; // skip admin
+              return (
+                <NavLink
+                  key={item.href}
+                  to={item.href}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-3 py-2 rounded-md ${
+                      isActive
+                        ? "bg-gray-200 text-gray-900 font-medium"
+                        : "text-gray-700 dark:text-white/90 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`
+                  }
+                >
+                  <item.icon className="w-4 h-4" />
+                  {item.label}
+                </NavLink>
+              );
+            })}
+          </nav>
           {/* Logout button */}
           <Button
             onClick={() => {

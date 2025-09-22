@@ -11,7 +11,7 @@ import {
 export default function CredentialLogin() {
   return (
     <Dialog>
-      <DialogTrigger className="bg-sky-500 hover:bg-sky-600" asChild>
+      <DialogTrigger className="bg-sky-500 hover:bg-sky-600 dark:bg-sky-500 dark:hover:bg-sky-600" asChild>
         <Button variant="outline">Login Credentials</Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg [&>button:last-child]:hidden">

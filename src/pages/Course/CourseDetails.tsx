@@ -80,8 +80,8 @@ export default function CourseDetails() {
                     {/* end left content */}
 
                     {/* right enroll content content  */}
-                    <div className='w-1/3 sticky top-6 shadow-md overflow-hidden bg-white rounded-xl p-6 border border-blue-500'>
-                        <div className={`relative h-48 flex items-center justify-center cursor-pointer bg-[url(${thumbnail})]`}
+                    <div className='w-1/3 sticky top-6 shadow-md overflow-hidden bg-white dark:bg-black rounded-xl p-6 border border-blue-500'>
+                        <div className={`relative h-48 flex items-center justify-center cursor-pointer bg-[url(${thumbnail})] border-2 dark:border-white/25 rounded-md`}
                         onClick={() => setShowModal(true)}>
                             {/* add here youtube video. when i click to play it open with a modal and play in modal */}
                             <Play className=' text-4xl z-10'></Play>
@@ -99,7 +99,7 @@ export default function CourseDetails() {
                                 {isLoading ? "Adding..." : "Enroll Now"}
                                 </Button>
                             </div>
-                            <div className="space-y-2 text-base font-semibold text-gray-700">
+                            <div className="space-y-2 text-base font-semibold text-gray-700 dark:text-white/90">
                                 <div className="flex items-center gap-2">
                                     <Timer className="w-4 h-4" />
                                     <span>29.58 hours on-demand video</span>
